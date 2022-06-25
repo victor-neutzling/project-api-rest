@@ -5,6 +5,7 @@ import users from "../models/User.js";
 class taskController{
     static getTasks = (req:Request,res:Response) =>{
         tasks.find((err:any,tasks) => {
+            res.set({'Access-Control-Allow-Origin': '*'})
             res.status(200).json(tasks)
         })
     }
@@ -14,8 +15,10 @@ class taskController{
         users.findById(id).populate("name").exec(
        (err:any,tasks:any) => {
             if(err){
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(404).send({message: err.message})
             }else{
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(200).send(tasks);
             }
         })
@@ -25,8 +28,10 @@ class taskController{
 
         task.save((err:any)=>{
             if(err){
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(500).send({message: `${err.message} - task register failed.`})
             }else{
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(201).send(task.toJSON())
             }
         })
@@ -36,8 +41,10 @@ class taskController{
 
         tasks.findByIdAndUpdate(id,{$set: req.body}, (err:any) => {
             if(err){
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(404).send({message: err.message})
             }else{
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(204).send({message: 'task updated sucessfully'});
             }
         })
@@ -47,8 +54,10 @@ class taskController{
 
         tasks.findByIdAndRemove(id,(err:any,tasks:any) => {
             if(err){
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(404).send({message: err.message})
             }else{
+                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(204).send({message: 'task deleted sucessfully'});
             }
         })

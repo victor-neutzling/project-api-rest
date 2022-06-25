@@ -12,8 +12,7 @@ class taskController{
     static getTaskById = (req:Request,res:Response) =>{
         const id = req.params.id
         
-        users.findById(id).populate("name").exec(
-       (err:any,tasks:any) => {
+        tasks.findById(id,(err:any,tasks:any) => {
             if(err){
                 res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(404).send({message: err.message})

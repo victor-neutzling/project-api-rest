@@ -1,5 +1,4 @@
 import tasks from "../models/Task.js";
-import users from "../models/User.js";
 class taskController {
 }
 taskController.getTasks = (req, res) => {
@@ -10,7 +9,7 @@ taskController.getTasks = (req, res) => {
 };
 taskController.getTaskById = (req, res) => {
     const id = req.params.id;
-    users.findById(id).populate("name").exec((err, tasks) => {
+    tasks.findById(id, (err, tasks) => {
         if (err) {
             res.set({ 'Access-Control-Allow-Origin': '*' });
             res.status(404).send({ message: err.message });

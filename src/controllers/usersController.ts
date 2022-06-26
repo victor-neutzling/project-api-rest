@@ -23,14 +23,16 @@ class userController{
         })
     }
     static setUser = (req:Request,res:Response) =>{
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', '*');
+        res.setHeader('Access-Control-Allow-Headers', '*');
         let user = new users(req.body);
 
         user.save((err:any)=>{
             if(err){
-                res.set({'Access-Control-Allow-Origin': '*'})
+                
                 res.status(500).send({message: `${err.message} - user register failed.`})
             }else{
-                res.set({'Access-Control-Allow-Origin': '*'})
                 res.status(201).send(user.toJSON())
             }
         })

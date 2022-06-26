@@ -9,7 +9,17 @@ db.once("open", ()=>{
 })
 
 const app = express();
-app.use(express.json());
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+});
+
+app.use(express.json())
+    
+;
 routes(app);
 export default app;
 
